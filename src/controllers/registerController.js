@@ -15,7 +15,7 @@ export async function addRegister(req, res){
 
     const session = await db.collection('sessions').findOne({token});
     if(!session) return res.sendStatus(401);
-    const user = await db.collection('users').findOne({_id: new ObjectId(session.userId)});
+    
 
     await db.collection("registers").insertOne({
         ...registerBody,
@@ -38,5 +38,9 @@ export async function getRegisters(req, res){
         userId: new objectId(session.userId)
     }).toArray();
 
-    return res.send(registers);
+    const user = await db.collection('users').findOne({_id: new ObjectId(session.userId)});
+
+
+
+    return res.send({registers: registers, userName: user.name});
 }
