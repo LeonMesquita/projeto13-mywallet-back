@@ -44,3 +44,28 @@ export async function getRegisters(req, res){
 
     return res.send({registers: registers, userName: user.name});
 }
+
+export async function deleteRegister(req, res){
+    console.log('entrou')
+    const { authorization } = req.headers;
+    console.log(authorization);
+    const token = authorization?.replace("Bearer ", "");
+
+    const session = await db.collection('sessions').findOne({token});
+    if(!session) return res.sendStatus(401);
+
+    const { registerId } = req.body;
+    console.log(registerId);
+
+    try{
+        await db.collection('registers').deleteOne({_id: new objectId(registerId)});
+        return res.sendStatus(200);
+
+    }catch(error){
+        console.log(error);
+        return res.sendStatus(400);
+
+    }
+    
+
+}
