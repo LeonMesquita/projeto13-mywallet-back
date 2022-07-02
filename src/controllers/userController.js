@@ -1,18 +1,9 @@
 import dotenv from 'dotenv';
 dotenv.config();
-import { MongoClient, ObjectId } from 'mongodb';
 import bcrypt from 'bcrypt';
 import {v4 as uuid} from 'uuid';
 import joi from 'joi';
-
-
-
-const client = new MongoClient(process.env.MONGO_URI);
-let db = null;
-client.connect().then(() => {
-    db = client.db('mywallet_db');
-});
-
+import {db, objectId} from '../db/mongo.js'
 
 
 
@@ -69,7 +60,13 @@ export async function loginUser(req, res){
     const token = uuid();
     await db.collection('sessions').insertOne({
         token,
-        userId: findUser._id
+        userId: findUser._id,
+        userEmail: findUser.email
     });
     return res.status(201).send(token);
+}
+
+
+export async function getUser(req, res){
+
 }

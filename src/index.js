@@ -1,7 +1,8 @@
 import express from 'express';
 import cors from 'cors';
-import { createUser, loginUser } from './controllers/userController.js';
-
+import { getUser } from './controllers/userController.js';
+import authRouter from './routes/authRouter.js';
+import registerRouter from './routes/registerRouter.js';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -11,14 +12,10 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+app.use(authRouter);
+app.use(registerRouter);
+app.get('/user', getUser);
 
-app.post('/sign-in', createUser);
-app.post('/login', loginUser);
-
-
-app.get("/", (req, res) => {
-    res.send('Hello World');
-});
 
 const PORT = process.env.PORT;
 
