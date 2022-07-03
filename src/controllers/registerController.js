@@ -39,10 +39,12 @@ export async function getRegisters(req, res){
     }).toArray();
 
     const user = await db.collection('users').findOne({_id: new ObjectId(session.userId)});
+   // console.log(registers);
+    console.log(user);
 
 
 
-    return res.send({registers: registers, userName: 'user.name'});
+    return res.send({registers: registers, userName: user.name});
 }
 
 export async function deleteRegister(req, res){
