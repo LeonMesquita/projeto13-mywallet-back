@@ -67,6 +67,12 @@ export async function loginUser(req, res){
 }
 
 
-export async function getUser(req, res){
+export async function logoutUser(req, res){
+    const { authorization } = req.headers;
+    const token = authorization?.replace("Bearer ", "");
+
+    await db.collection('sessions').deleteOne({token});
+    return res.status(200).send("OK");
+
 
 }
