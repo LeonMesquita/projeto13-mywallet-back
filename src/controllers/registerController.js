@@ -42,7 +42,7 @@ export async function getRegisters(req, res){
 
 
 
-    return res.send({registers: registers, userName: user.name});
+    return res.send({registers: registers, userName: 'user.name'});
 }
 
 export async function deleteRegister(req, res){
