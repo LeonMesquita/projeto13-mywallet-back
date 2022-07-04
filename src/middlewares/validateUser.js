@@ -1,10 +1,4 @@
-import {db, objectId} from '../db/mongo.js'
-import joi from 'joi';
-
-
-
-
-
+import {db} from '../db/mongo.js'
 export async function validateUser(req, res, next){
 
     const { authorization } = req.headers;
@@ -20,5 +14,3 @@ export async function validateUser(req, res, next){
 export async function validateCredentials(req, res, next){
     
 }
-
-//export default validateUser;

@@ -3,7 +3,7 @@ dotenv.config();
 import bcrypt from 'bcrypt';
 import {v4 as uuid} from 'uuid';
 import joi from 'joi';
-import {db, objectId} from '../db/mongo.js'
+import {db} from '../db/mongo.js'
 
 
 
@@ -40,7 +40,6 @@ export async function createUser(req, res){
 
 
 export async function loginUser(req, res){
-    console.log(req.body);
     const user = req.body;
     const userSchema = joi.object({
         email: joi.string().required(),
