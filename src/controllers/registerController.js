@@ -1,7 +1,6 @@
 import dotenv from 'dotenv';
 dotenv.config();
 import {db, objectId} from '../db/mongo.js'
-import { ObjectId } from 'mongodb';
 import dayjs from 'dayjs';
 dayjs().format()
 
